@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hudson Yards - Quantified Community</title>
+  <link rel="icon" type="image/png" href="files/cusp_icon.png" />
+  <link rel="stylesheet" href="css/GLMap.css">
+  <style type="text/css">
+    * {margin: 0; padding: 0;}
+    html, body {height: 100%;}
+    #map {position: absolute; width: 100%; height: 100%;}
+    #logo {opacity: 0.85; }
+    #container {position: relative; left: 0; top: 0; width: 100%; height: 100%;}
+
+  </style>
+</head>
+
+<body>
+  <div id="container">
+    <div id="map"></div>
+    <div id="logo">
+      <img src="files/Cusp_Logo_FINAL.jpg" alt="CUSP Logo", style="position: relative; top: 10px; left: 10px; height: 150px; box-shadow: 10px 10px 5px #888888;">
+    </div>
+  </div>
+
+  <script src="js/GLMap.js"></script>
+  <script src="js/OSMBuildings-GLMap.js"></script>
+  <!-- // <script src="js/geojson-vt.js"></script> -->
+  <script src="js/HY_10.js"></script>
+  <script src="js/HY_30.js"></script>
+  <script src="js/HY_15_50.js"></script>
+  <script src="js/HY_area_big.js"></script>
+
+  <script>
+   // create map engine 
+   var map = new GLMap('map', {
+
+      position: {latitude: 40.755748, longitude: -74.001926 },
+      zoom: 17,
+      rotation: 0,
+      tilt: 30,
+      minZoom: 0,
+      bend: 1.0,
+      attribution: 'Bartosz Bonczak (NYU CUSP), <a href="http://www1.nyc.gov/site/doitt/initiatives/3d-building.page">NYC DoITT</a>, <a "href=https://osmbuildings.org/">OSM Buildings</a>, <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    });
+
+  
+    // add osmbuildings
+    var osmb = new OSMBuildings({}).addTo(map); 
+
+    // add basemap tilelayer
+    // osmb.addMapTiles('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png');
+    osmb.addMapTiles('http://{s}.tiles.mapbox.com/v3/osmbuildings.kbpalbpk/{z}/{x}/{y}.png');
+    // osmb.addGeoJSONTiles('http://{s}.data.osmbuildings.org/0.2/anonymous/tile/{z}/{x}/{y}.json');
+    // osmb.addGeoJSON( HY_10 );
+    // osmb.addGeoJSON( HY_30 );
+    // osmb.addGeoJSON( HY_15_50 );
+    osmb.addGeoJSON( HY_area_big );
+    // osmb.addOBJ('10_HY.obj', { latitude: 40.753935, longitude: -74.001588 })
+    // osmb.addOBJ('30_HY.obj', { latitude: 40.753870, longitude: -74.001513 })
+    osmb.addOBJ('files/HY_full.obj', { latitude: 40.753870, longitude: -74.001513 })
+
+
+  </script>
+</body>
+</html>
